@@ -59,10 +59,30 @@ console.log(
 );
 
 console.warn(`
+  Afiseaza numele complet a lui Larry folosind obiectul Person.
+`);
+console.log(
+  person.friends.steven.friends.larry.name +
+    ' ' +
+    person.friends.steven.friends.larry.surname,
+);
+
+console.warn(`
 Folosind obiectul Carol afiseaza numele complet al lui Person.
 `);
 console.log(
   carol.friends.andra.friends.person.name +
     ' ' +
     carol.friends.andra.friends.person.surname,
+);
+
+console.warn(`
+  Folosind obiectul Andra afiseaza numarul total de
+  caractere al numelui complet al lui Person.
+`);
+console.log(
+  (
+    carol.friends.andra.friends.person.name.length +
+    carol.friends.andra.friends.person.surname.length
+  ).toString(),
 );
