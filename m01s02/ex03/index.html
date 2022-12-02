@@ -14,7 +14,8 @@
   <title>Evenimente</title>
 </head>
 
-<body onload="console.log(prompt('Care este numele tau?'));">
+<body onload="console.log(prompt('Care este numele tau?'));
+console.log(alert('Bine ai venit pe acest site!'))">
 
   <button
     onclick="alert('Bine ai venit la Pixellab!');"
@@ -26,6 +27,16 @@
     onmouseover="console.log('Apasa-ma!');"
     title="format"
   >Apasa-ma!</button>
+
+  <button
+    onclick="alert('Bine ai apasat pe acest buton!')"
+    title="format"
+  >Apasa-l!</button>
+
+  <button
+    onclick="console.log((20 + 156).toString())"
+    title="format"
+  >Fa un calcul</button>
 </body>
 
 </html>
