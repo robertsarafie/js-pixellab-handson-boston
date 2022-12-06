@@ -82,6 +82,6 @@ console.log(
     ' si ' +
     petName.name +
     ' este o diferenta de ' +
-    person.difference +
+    (2022 - person.birthYear - person.pets[0].age) +
     ' ani.',
 );
