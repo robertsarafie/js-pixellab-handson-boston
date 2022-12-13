@@ -2,30 +2,26 @@ var person = {
   firstName: 'Chris',
   lastName: 'McCandless',
   email: 'chris@gmail.com',
+  age: 54,
   birthYear: 1968,
   pets: [
     {
       name: 'Bruno',
       species: 'canis lupus familiaris',
-      age: '2',
+      age: 2,
     },
     {
       name: 'Rio',
       species: 'bird',
-      age: '5',
+      age: 5,
     },
     {
       name: 'Luis',
       species: 'monkey',
-      age: '7',
+      age: 7,
     },
   ],
   zipCode: '550300',
-  difference: 52,
-};
-
-var petName = {
-  name: 'Bruno',
 };
 
 console.warn(`
@@ -80,8 +76,8 @@ console.log(
   'Intre ' +
     person.firstName +
     ' si ' +
-    petName.name +
+    person.pets[0].name +
     ' este o diferenta de ' +
-    (2022 - person.birthYear - person.pets[0].age) +
+    (person.age - person.pets[0].age) +
     ' ani.',
 );
