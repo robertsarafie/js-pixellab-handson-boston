@@ -65,10 +65,12 @@ var i = 1;
 // Folosind metoda prompt de doua ori cere utilizatorului un
 // numar si o limita superioara apoi afiseaza toti multiplii de
 // numar intre 5 si limita superioara introduse.
-var userInput = prompt('Intro un numar');
-var userInput2 = prompt('Introdu o limita superioara');
-while (userInput <= userInput2) {
-  userInput++;
-
-  console.log(userInput);
+var x = prompt('Spune un numar:');
+var y = prompt('Spune o limita superioara:');
+var i = 5;
+while (i < y) {
+  if (x % i === 0) {
+    console.log(i);
+  }
+  i++;
 }

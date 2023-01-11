@@ -46,9 +46,8 @@
 // }
 
 // Folosind keywordul continue, afiseaza doar numele impare intre 1 si 89.
-// nu mi-o iesit
-// for (var i = 1; i <= 89; i++ ) {
-//   if ((i = i + 2) !== 0) {
+// for (var i = 1; i < 89; i++) {
+//   if (i % 2 === 0) {
 //     continue;
 //   }
 
@@ -56,8 +55,7 @@
 // }
 
 // In mod similar, afiseaza doar numerele care sunt divizibile cu 3.
-// nu stiu ce am gresit, dar nu-mi ia 1 si 89
-// for (var i = 1; i <= 89; i++) {
+// for (var i = 1; i < 89; i++) {
 //   if (i % 3 !== 0) {
 //     continue;
 //   }

@@ -15,9 +15,18 @@
 // }
 
 // Folosind metoda prompt cere utilizatorului numarul pentru care trebuie sa gasesti multipli si afiseaza mesajul: “Acest numar este multiplu de x.”
-// var userInput = prompt('Introdu un numar');
-// for (userInput <= 100; userInput++; ) {
-//   if (userInput)
+// var x = prompt('Spune un numar pana la 1000:');
+// for (var i = 0; i < 1000; i++) {
+//   if (x % i === 0) {
+//     console.log(`Acest numar este multiplu de ${i}.`);
+//   }
 // }
 
 // Folosind inca o metoda prompt, cere utilizatorului si limita superioara pana la care sa numere bucla si sa afiseze multipli.
+// var x = prompt('Spune un numar:');
+// var y = prompt('Spune o limita superiara');
+// for (var i = 0; i < y; i++) {
+//   if (x % i === 0) {
+//     console.log(`Acest numar este multiplu de ${i}.`);
+//   }
+// }

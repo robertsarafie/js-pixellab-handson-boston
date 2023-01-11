@@ -49,16 +49,25 @@ var i = 1;
 // } while (i < 100);
 
 // Folosind keywordul continue afiseaza doar numerele impare intre 8 si 32.
-var i = 8; // am incercat la while cu 8 < i < 32, dar se pare ca e gresit, nu stiu cum ar fi metoda perfecta
-do {
-  console.log(i);
-  i++;
+// var i = 8;
+// var i = 8;
+// do {
+//   i++;
 
-  if ((i = i + 2) !== 0) {
-    continue;
-  }
-} while (i < 32);
+//   if (i % 2 !== 0) {
+//     console.log(i);
+//   }
+// } while (i < 32);
 
 // Folosind metoda prompt de trei ori cere utilizatorului un numar,
 // o limita inferioara si o limita superioara apoi afiseaza toti multiplii
 // de numar intre limita inferioara si limita superioara introduse.
+// var x = prompt('Spune un numar:');
+// var i = prompt('Spune o limita inferioara:');
+// var y = prompt('Spune o limita superioara:');
+// do {
+//   if (x % i === 0) {
+//     console.log(i);
+//   }
+//   i++;
+// } while (i < y);

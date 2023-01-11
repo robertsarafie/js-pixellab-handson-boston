@@ -57,43 +57,15 @@ console.warn(`
   “Intre Dragos si Twix este o diferenta de xx ani. Intre Dragos si Mars… ”
   (repeta pentru toate intrarile din array).
 `);
-// var message = '';
-// for (var i = 0; i < person.pets.length; i++) {
-//   var pet = person.pets[i];
-//   var diff = Math.abs(2022 - person.birthYear - pet.age);
-
-//   message += `Intre ${person.firstName} si ${pet.name} este o diferenta de ${diff} ani.\n`;
-// }
-// console.log(message.trim());
-// !!! Am incercat sa folosesc \n care am inteles ca e ca un fel de <br>
+var message = '';
 for (var i = 0; i < person.pets.length; i++) {
-  var pet = person.pets;
-  var diff0 = Math.abs(
-    new Date().getFullYear() - person.birthYear - pet[0].age,
-  );
-  var diff1 = Math.abs(
-    new Date().getFullYear() - person.birthYear - pet[1].age,
-  );
-  var diff2 = Math.abs(
-    new Date().getFullYear() - person.birthYear - pet[2].age,
-  );
-  var diff3 = Math.abs(
-    new Date().getFullYear() - person.birthYear - pet[3].age,
+  var pet = person.pets[i];
+  var diff = Math.abs(new Date().getFullYear() - person.birthYear - pet.age);
+
+  console.log(
+    `Intre ${person.firstName} si ${pet.name} este o diferenta de ${diff} ani.`,
   );
 }
-console.log(
-  `Intre ${person.firstName} si ${pet[0].name} este o diferenta de ${diff0} ani.`,
-);
-console.log(
-  `Intre ${person.firstName} si ${pet[1].name} este o diferenta de ${diff1} ani.`,
-);
-console.log(
-  `Intre ${person.firstName} si ${pet[2].name} este o diferenta de ${diff2} ani.`,
-);
-console.log(
-  `Intre ${person.firstName} si ${pet[3].name} este o diferenta de ${diff3} ani.`,
-);
-// Nu mi-o venit alta varianta...
 
 console.warn(`
   Folosind o bucla for afiseaza in ordine inversa numele
@@ -110,10 +82,19 @@ console.warn(`
   afiseaza propozitia: “xxx este cel mai batran animal pe care il am,
   dar intre noi este o diferenta de xx ani.”
 `);
+var personAge = new Date().getFullYear() - person.birthYear;
+var biggestAge = 0;
+var diff = 0;
 for (var i = 0; i < person.pets.length; i++) {
-  var petAge = person.pets[i].age;
+  if (person.pets[i].age > biggestAge) {
+    biggestAge = person.pets[i].age;
+    diff = personAge - biggestAge;
+    var petName = person.pets[i].name;
+  }
 }
-console.log(maxAge);
+console.log(
+  `${petName} este cel mai batran animal pe care il am, dar intre noi este o diferenta de ${diff} ani.`,
+);
 
 console.warn(`
   Folosind o bucla forEach afiseaza propozitia:
