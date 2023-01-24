@@ -101,4 +101,24 @@ Adauga metode numite turnLightsOn() si turnLightsOff() care sa manipuleze valoar
 Adauga o metoda numita flashLights() care sa apeleze cele doua metode in succesiune, folosind metoda window.setTimeout().
  */
 
+/**
+ * Adauga cele doua variabile (opel si audi) intr-un array numit cars. (var cars = [opel, audi])
+Ruleaza o bucla prin forEach si afiseaza propozitiile (pentru fiecare din masini)
+“Masina era marca make si se deplasa cu speed km/h.”
+In fiecare iteratie, decelereaza masina cu 5 unitati, apoi afiseaza: “Viteza noua este speed km/h.”
+ */
 const cars = [audi, opel];
+
+cars.forEach((car) => {
+  console.log(
+    `Masina era marca ${car.make} si se deplasa cu ${car.speed} km/h.`,
+  );
+
+  car.decelerate();
+  car.decelerate();
+  car.decelerate();
+  car.decelerate();
+  car.decelerate();
+
+  console.log(`Viteza noua este ${car.speed} km/h.`);
+});

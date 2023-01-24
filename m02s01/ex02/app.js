@@ -13,15 +13,11 @@ class Vehicle {
   }
 
   accelerate() {
-    this.speed++;
-
-    this.displaySpeed();
+    this.setSpeed(this.speed + 1);
   }
 
   decelerate() {
-    this.speed--;
-
-    this.displaySpeed();
+    this.setSpeed(this.speed - 1);
   }
 
   setSpeed(speed = 0) {
@@ -53,3 +49,7 @@ class Bicycle extends Vehicle {
 
 const bike = new Bicycle('Pegas', 'red', 8, 20);
 bike.setSpeed(2);
+bike.decelerate();
+bike.decelerate();
+bike.decelerate();
+bike.setSpeed(-10);
