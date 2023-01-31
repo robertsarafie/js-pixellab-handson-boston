@@ -1,5 +1,6 @@
 class Car {
   areHazardsOn = false;
+  areLightsOn = false;
 
   constructor(
     left = 0,
@@ -17,6 +18,8 @@ class Car {
     this.capColor = capColor;
     this.bodyColor = bodyColor;
     this.roofColor = roofColor;
+
+    this.intervalId = -1;
 
     this.frame = document.createElement('div');
     this.frame.classList.add('frame');
@@ -78,6 +81,7 @@ class Car {
   turnLightsOn() {
     // this.lightFront.style.backgroundColor = 'yellow';
     this.lightFront.classList.add('light--on');
+    this.areLightsOn = true;
 
     // method chaining
     return this;
@@ -86,6 +90,7 @@ class Car {
   turnLightsOff() {
     // this.lightFront.style.backgroundColor = 'yellow';
     this.lightFront.classList.remove('light--on');
+    this.areLightsOn = false;
 
     // method chaining
     return this;
@@ -93,6 +98,7 @@ class Car {
 
   engageBreak() {
     this.lightBack.classList.add('light--on');
+    this.areLightsOn = true;
 
     // method chaining
     return this;
@@ -100,23 +106,11 @@ class Car {
 
   disengageBreak() {
     this.lightBack.classList.remove('light--on');
+    this.areLightsOn = false;
 
     // method chaining
     return this;
   }
-
-  toggleHazards() {
-    this.lightFront.classList.add('light--on');
-    this.lightBack.classList.add('light--on');
-    this.areHazardsOn = true;
-
-    const self = this;
-
-    setInterval(self.toggleHazards, 500);
-
-    return this;
-  }
-  // ???
 
   changePosition(left = 0, top = 0) {
     this.frame.style.left = `${left}px`;
@@ -166,6 +160,28 @@ class Car {
 
     // method chaining
     return element;
+  }
+
+  toggleHazards() {
+    if (this.areHazardsOn === true) {
+      // stop hazards
+      clearInterval(this.intervalId);
+      this.areHazardsOn = false;
+    } else {
+      // v2 for "this"
+      this.intervalId = setInterval(() => {
+        if (this.areLightsOn === true) {
+          this.turnLightsOff();
+          this.disengageBreak();
+        } else {
+          this.turnLightsOn();
+          this.engageBreak();
+        }
+      }, 800);
+      this.areHazardsOn = true;
+    }
+
+    return this;
   }
 
   render() {
