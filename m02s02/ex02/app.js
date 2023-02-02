@@ -7,6 +7,7 @@ const $personForm = $('#personForm')
     const $surnameInput = $form.find('input[name="surname"]');
     const $ageInput = $form.find('input[name="age"]');
     const $skillInputs = $form.find('input[name^="skill-"]');
+    const $petInputs = $form.find('input[name^="pet-"]');
 
     const skills = [];
 
@@ -16,15 +17,36 @@ const $personForm = $('#personForm')
       skills.push($skillInput.val());
     });
 
+    const pets = [];
+    $petInputs.each(function () {
+      // name="pet-Twix, Papagal, 45"
+      const $input = $(this);
+      const name = $input.prop('name');
+      const petValue = name.split('-')[1];
+      const parts = petValue.split(', ');
+      const pet = {
+        name: parts[0],
+        species: parts[1],
+        age: parts[2],
+      };
+
+      pets.push(pet);
+    });
+
+    const friends = [];
+
     const person = {
       name: $nameInput.val(),
       surname: $surnameInput.val(),
       age: $ageInput.val(),
       skills,
+      pets,
     };
 
     $form.trigger('reset');
     $form.find('.skills-ul').remove();
+    $form.find('.pet-preview-ul').remove();
+    $form.find('.friend-preview-ul').remove();
     $form.next().remove();
 
     $form.after(displayPerson(person));
@@ -42,7 +64,7 @@ const $personForm = $('#personForm')
     $editSkillButton.siblings('.save-skill-button').show();
     $editSkillButton.hide();
   })
-  .on('click', '.cancel-edit-skill-button', function () {
+  .on('click', '.cancel-edit-skill-button', function cancelEditSkill() {
     const $cancelEditSkillButton = $(this).hide();
 
     $cancelEditSkillButton.siblings('.delete-skill-button').show();
@@ -51,8 +73,9 @@ const $personForm = $('#personForm')
       .siblings('input[name^="skill-"]')
       .prop('type', 'hidden');
     $cancelEditSkillButton.siblings('.skill-label').show();
+    $cancelEditSkillButton.siblings('.save-skill-button').hide();
   })
-  .on('click', '.save-skill-button', function () {
+  .on('click', '.save-skill-button', function saveSkill() {
     const $saveSkillButton = $(this).hide();
     const $skillInput = $saveSkillButton
       .siblings('input[name^="skill-"]')
@@ -65,10 +88,40 @@ const $personForm = $('#personForm')
 
     $saveSkillButton.siblings('.delete-skill-button').show();
     $saveSkillButton.siblings('.edit-skill-button').show();
-    $saveSkillButton.siblings('input[name^="skill-"]').prop('type', 'hidden');
-    $saveSkillButton.siblings('.skill-label').show();
+    $saveSkillButton.siblings('.skill-label').text(newSkill).show();
     $saveSkillButton.siblings('.cancel-edit-skill-button').hide();
+  })
+  .on('click', '.create-pet-button', function () {
+    const $createPetButton = $(this);
+    const $inputs = $createPetButton.siblings('input[name]');
+    const pet = {};
+
+    $inputs.each(function () {
+      const $input = $(this);
+      const value = $input.val();
+      const key = $input.prop('name').split('-').pop();
+
+      pet[key] = value;
+    });
+
+    $inputs.val('');
+
+    $createPetButton.after(rederPetUl(pet));
   });
+
+$('#has-pets').on('click', function () {
+  const $checkbox = $(this);
+  const $fieldset = $checkbox.next().next();
+  const checked = $checkbox.prop('checked') === true;
+
+  if (checked === true) {
+    // show fieldset
+    $fieldset.slideDown();
+  } else {
+    // hide fieldset
+    $fieldset.slideUp();
+  }
+});
 
 const $skillButton = $('#skill')
   .next()
@@ -143,6 +196,47 @@ function renderSkillsUl(skill = '') {
   return $skillsUl;
 }
 
+function rederPetUl(pet = {}) {
+  const ulClass = 'pet-preview-ul';
+  let $ul = $(`.${ulClass}`);
+
+  let petString = '';
+  Object.keys(pet).forEach(function (keyName, index, keys) {
+    const value = pet[keyName];
+    let punctuation = ', ';
+
+    if (keys.length - 1 === index) {
+      punctuation = '';
+    }
+
+    petString += `${value}${punctuation}`;
+  });
+
+  if ($ul.length === 0) {
+    $ul = $('<ul>', {
+      class: ulClass,
+    });
+  }
+
+  const $li = $('<li>')
+    .append(
+      $('<span>', {
+        text: petString,
+      }),
+    )
+    .append(
+      $('<input>', {
+        type: 'hidden',
+        value: petString,
+        name: `pet-${petString}`,
+      }),
+    );
+
+  $ul.append($li);
+
+  return $ul;
+}
+
 // function renderPerson(person) {
 //   const $personDisplay = $('<div>');
 //   const $personName = $('<h1>', {
@@ -184,9 +278,22 @@ function displayPerson(person) {
 
   $personDisplay
     .append(displayPersonDetails(person))
-    .append(displayPersonSkills(person));
+    .append(displayPersonSkills(person))
+    .append(displayPet(person));
 
   return $personDisplay;
+}
+
+function displayPet(person) {
+  const $petDisplay = $('<div>');
+
+  person.pets.forEach(function (pet) {
+    $('<p>', {
+      text: `${pet.name}, ${pet.species}, ${pet.age}`,
+    }).appendTo($petDisplay);
+  });
+
+  return $petDisplay;
 }
 
 function displayPersonDetails(person) {
