@@ -8,6 +8,7 @@ const $personForm = $('#personForm')
     const $ageInput = $form.find('input[name="age"]');
     const $skillInputs = $form.find('input[name^="skill-"]');
     const $petInputs = $form.find('input[name^="pet-"]');
+    const $friendInputs = $form.find('input[name^="friend-"]');
 
     const skills = [];
 
@@ -34,6 +35,19 @@ const $personForm = $('#personForm')
     });
 
     const friends = [];
+    $friendInputs.each(function () {
+      const $input = $(this);
+      const name = $input.prop('name');
+      const friendValue = name.split('-')[1];
+      const parts = friendValue.split(', ');
+      const friend = {
+        name: parts[0],
+        surname: parts[1],
+        age: parts[2],
+      };
+
+      friends.push(friend);
+    });
 
     const person = {
       name: $nameInput.val(),
@@ -41,6 +55,7 @@ const $personForm = $('#personForm')
       age: $ageInput.val(),
       skills,
       pets,
+      friends,
     };
 
     $form.trigger('reset');
@@ -107,6 +122,23 @@ const $personForm = $('#personForm')
     $inputs.val('');
 
     $createPetButton.after(rederPetUl(pet));
+  })
+  .on('click', '.create-friend-button', function () {
+    const $createFriendButton = $(this);
+    const $inputs = $createFriendButton.siblings('input[name]');
+    const friend = {};
+
+    $inputs.each(function () {
+      const $input = $(this);
+      const value = $input.val();
+      const key = $input.prop('name').split('-').pop();
+
+      friend[key] = value;
+    });
+
+    $inputs.val('');
+
+    $createFriendButton.after(renderFriendUl(friend));
   });
 
 $('#has-pets').on('click', function () {
@@ -237,6 +269,47 @@ function rederPetUl(pet = {}) {
   return $ul;
 }
 
+function renderFriendUl(friend = {}) {
+  const ulClass = 'friend-preview-ul';
+  let $ul = $(`.${ulClass}`);
+
+  let friendString = '';
+  Object.keys(friend).forEach(function (keyName, index, keys) {
+    const value = friend[keyName];
+    let punctuation = ', ';
+
+    if (keys.length - 1 === index) {
+      punctuation = '';
+    }
+
+    friendString += `${value}${punctuation}`;
+  });
+
+  if ($ul.length === 0) {
+    $ul = $('<ul>', {
+      class: ulClass,
+    });
+  }
+
+  const $li = $('<li>')
+    .append(
+      $('<span>', {
+        text: friendString,
+      }),
+    )
+    .append(
+      $('<input>', {
+        type: 'hidden',
+        value: friendString,
+        name: `friend-${friendString}`,
+      }),
+    );
+
+  $ul.append($li);
+
+  return $ul;
+}
+
 // function renderPerson(person) {
 //   const $personDisplay = $('<div>');
 //   const $personName = $('<h1>', {
@@ -279,7 +352,8 @@ function displayPerson(person) {
   $personDisplay
     .append(displayPersonDetails(person))
     .append(displayPersonSkills(person))
-    .append(displayPet(person));
+    .append(displayPet(person))
+    .append(displayFriend(person));
 
   return $personDisplay;
 }
@@ -294,6 +368,18 @@ function displayPet(person) {
   });
 
   return $petDisplay;
+}
+
+function displayFriend(person) {
+  const $friendDisplay = $('<div>');
+
+  person.friends.forEach(function (friend) {
+    $('<p>', {
+      text: `${friend.name}, ${friend.surname}, ${friend.age}`,
+    }).appendTo($friendDisplay);
+  });
+
+  return $friendDisplay;
 }
 
 function displayPersonDetails(person) {
