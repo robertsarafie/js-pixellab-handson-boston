@@ -4,17 +4,27 @@ class Car {
     this.color = color;
     this.wheels = wheels;
     this.speed = speed;
+    this.topSpeed = 150;
+    this.topReverseSpeed = -80;
   }
 
-  accelerate() {
-    this.speed = this.speed + 1;
+  accelerate(deltaSpeed = 1) {
+    this.speed = this.speed + deltaSpeed;
 
     return this;
   }
 
-  decelerate() {
-    this.speed = this.speed - 1;
+  decelerate(deltaSpeed = 1) {
+    this.speed = this.speed - deltaSpeed;
+
+    return this;
   }
+
+  // implementarea binecunoscutei metode
+  // setSpeed + protectiile de supra si subaccelerare
+  // + chaining
 }
 
 const audi = new Car('Audi', 'black', 4, 50);
+
+audi.accelerate();
