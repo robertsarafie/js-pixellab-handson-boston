@@ -6,8 +6,6 @@
   transition: background-color 1s ease;
 }
 
-input:checked + .box {
-  font-weight: bold;
-  font-size: 30px;
-  background-color: tan;
+label.box input:checked {
+  background-color: bisque;
 }

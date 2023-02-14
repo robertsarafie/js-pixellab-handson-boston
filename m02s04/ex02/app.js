@@ -1,9 +1,9 @@
 // event delegation
 const controls = document.querySelector('.controls');
-const box = document.querySelector('.box');
+const box = document.querySelector('label.box input:checked');
 const colorInput = document.querySelector('.controls .color');
-const boxChecked = document.querySelector('input:checked + .box');
-const inputC = document.querySelector('input');
+// const boxChecked = document.querySelector('input:checked + .box');
+// const inputC = document.querySelector('input');
 
 controls.addEventListener('click', (event) => {
   // target -> elementul de pe care a originat
@@ -21,12 +21,13 @@ controls.addEventListener('click', (event) => {
   const colorInput = event.currentTarget.querySelector('.color');
   colorInput.value = '';
 
-  // box.style.backgroundColor = color;
+  box.style.backgroundColor = color;
+
   // boxChecked.style.backgroundColor = color;
 
-  if (inputC.checked == true) {
-    box.style.backgroundColor = color;
-  }
+  // if (inputC.checked == true) {
+  //   box.style.backgroundColor = color;
+  // }
 
   event.preventDefault();
 });

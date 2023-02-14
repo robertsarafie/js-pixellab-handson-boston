@@ -24,18 +24,11 @@ const logMessage = (message = '') => {
   container.prepend(p);
 };
 
-const newMessage = (message2 = '') => {
-  const p2 = document.createElement('p');
-  p2.innerText = message2;
-
-  container.prepend(p2);
-};
-
 let initialWindowWidth = window.innerWidth;
 let initialWindowHeight = window.innerHeight;
 
 logMessage(initialWindowWidth);
-newMessage(`${initialWindowWidth} x ${initialWindowHeight}`);
+logMessage(calculateWindowSurface(initialWindowWidth, initialWindowHeight));
 
 window.addEventListener('resize', () => {
   const newWidth = window.innerWidth;
@@ -56,22 +49,23 @@ window.addEventListener('resize', () => {
   }
 
   logMessage(message);
-  newMessage(message2);
+  logMessage(message2);
 });
 
-function calculateWindowSurface(width, height) {
-  return width * height;
+function calculateWindowSurface(initialWindowWidth, initialWindowHeight) {
+  return initialWindowWidth * initialWindowHeight;
 }
+// Aici e bine asa? Daca pun cu window.innerWidth inauntrul functiei imi spune ca vrea ',' din cauza la punctul de dupa window
 
 document.addEventListener('DOMContentLoaded', () => {
   const p3 = document.createElement('p');
 
-  const WindowSurface = calculateWindowSurface(
+  const windowSurface = calculateWindowSurface(
     initialWindowWidth,
     initialWindowHeight,
   );
-  console.log(WindowSurface);
+  console.log(windowSurface);
 
-  p3.innerText = WindowSurface;
+  p3.innerText = windowSurface;
   container.prepend(p3);
 });
