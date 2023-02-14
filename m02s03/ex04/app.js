@@ -24,5 +24,9 @@ log('Imaginea se incarca...');
 // history DOM level 0
 image.onload = () => {
   // add event handler
+  addEventListener('click', () => {
+    alert(`Imaginea cu URLul: ${image.src} s-a incarcat.`);
+  });
+
   log('Imaginea s-a incarcat');
 };

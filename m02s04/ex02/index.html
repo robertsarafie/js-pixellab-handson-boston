@@ -4,32 +4,64 @@
 <head>
   <meta charset="utf-8" />
   <title>CSS animation in JavaScript</title>
-  <style>
-    .box {
-      width: 100px;
-      height: 100px;
-      border: 1px solid #000;
-      transition: background-color 1s ease;
-    }
-
-  </style>
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
 </head>
 
 <body>
+  <form class="form">
+    <input
+      type="radio"
+      id="box1"
+      name="boxes"
+      checked
+    >
+    <label
+      class="box"
+      for="box1"
+    >Test
+    </label>
 
-  <div class="box"></div>
+    <div class="controls">
+      <button data-color="red">Red</button>
+      <button data-color="green">Green</button>
+      <button data-color="blue">Blue</button>
 
-  <div class="controls">
-    <button data-color="red">Red</button>
-    <button data-color="green">Green</button>
-    <button data-color="blue">Blue</button>
+      <input
+        type="color"
+        class="color"
+      >
+      <button>Aplica</button>
+    </div>
+
+    <br><br>
 
     <input
-      type="color"
-      class="color"
+      type="radio"
+      id="box2"
+      name="boxes"
     >
-    <button>Aplica</button>
-  </div>
+    <label
+      class="box"
+      for="box2"
+    >Test2
+    </label>
+
+    <br><br>
+
+    <input
+      type="radio"
+      id="box3"
+      name="boxes"
+    >
+    <label
+      class="box"
+      for="box3"
+    >Test3
+    </label>
+  </form>
 
   <script src="app.js"></script>
 </body>

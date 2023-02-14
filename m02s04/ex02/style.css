@@ -1,0 +1,13 @@
+.box {
+  display: block;
+  width: 100px;
+  height: 100px;
+  border: 1px solid #000;
+  transition: background-color 1s ease;
+}
+
+input:checked + .box {
+  font-weight: bold;
+  font-size: 30px;
+  background-color: tan;
+}

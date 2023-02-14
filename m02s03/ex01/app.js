@@ -20,6 +20,20 @@ class Car {
     return this;
   }
 
+  setSpeed(speed = 0) {
+    if (speed > this.topSpeed) {
+      speed = this.topSpeed;
+    }
+
+    if (speed < this.topReverseSpeed) {
+      speed = this.topReverseSpeed;
+    }
+
+    this.speed = speed;
+
+    return this;
+  }
+
   // implementarea binecunoscutei metode
   // setSpeed + protectiile de supra si subaccelerare
   // + chaining
